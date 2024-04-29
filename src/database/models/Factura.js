@@ -19,7 +19,8 @@ Factura.init({
 }, {
     sequelize,
     modelName: "factura",
-    timestamps: false
+    timestamps: false,
+    freezeTableName: true
 })
 
 module.exports = Factura;

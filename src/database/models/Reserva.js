@@ -1,30 +1,31 @@
 const sequelize = require("../db")
 const { Model, DataTypes } = require("sequelize")
 
-class Testimonio extends Model {}
-Testimonio.init({
-    id_testimonio: {
+class Reserva extends Model {}
+Reserva.init({
+    id_reserva: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoIncrement: true
-    },
-    mensaje: {
-        type: DataTypes.STRING,
+        autoIncrement: true,
         allowNull: false
     },
     fecha: {
         type: DataTypes.DATE,
         allowNull: false
     },
-    clasificacion: {
+    hora: {
+        type: DataTypes.TIME,
+        allowNull: false
+    },
+    estado: {
         type: DataTypes.STRING,
         allowNull: false
     }
 }, {
     sequelize,
-    modelName: "testimonio",
+    modelName: "reserva",
     timestamps: false,
     freezeTableName: true
 })
 
-module.exports = Testimonio;
+module.exports = Reserva;

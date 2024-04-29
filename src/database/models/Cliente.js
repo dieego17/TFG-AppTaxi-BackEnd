@@ -4,6 +4,15 @@ const Usuario = require("./Usuario")
 
 class Cliente extends Usuario {}
 Cliente.init({
+    id_usuario: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        references: {
+            model: Usuario,
+            key: 'id_usuario'
+        }
+    },
     direccion: {
         type: DataTypes.STRING,
         allowNull: false
@@ -15,7 +24,8 @@ Cliente.init({
 }, {
     sequelize,
     modelName: "cliente",
-    timestamps: false
+    timestamps: false,
+    freezeTableName: true
 });
 
 module.exports = Cliente;

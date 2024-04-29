@@ -35,7 +35,8 @@ Viaje.init({
 }, {
     sequelize,
     modelName: "viaje",
-    timestamps: false
+    timestamps: false,
+    freezeTableName: true
 })
 
 module.exports = Viaje;

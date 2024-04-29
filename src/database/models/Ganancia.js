@@ -24,7 +24,8 @@ Ganancia.init({
 }, {
     sequelize,
     modelName: "ganancia",
-    timestamps: false
+    timestamps: false,
+    freezeTableName: true
 })
 
 module.exports = Ganancia;

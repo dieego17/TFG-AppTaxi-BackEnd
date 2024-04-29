@@ -19,7 +19,8 @@ Notificacion.init({
 }, {
     sequelize,
     modelName: "notificacion",
-    timestamps: false
+    timestamps: false,
+    freezeTableName: true
 })
 
 module.exports = Notificacion;

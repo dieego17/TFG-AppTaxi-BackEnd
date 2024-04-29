@@ -24,7 +24,8 @@ Gasto.init({
 }, {
     sequelize,
     modelName: "gasto",
-    timestamps: false
+    timestamps: false,
+    freezeTableName: true
 })
 
 module.exports = Gasto;

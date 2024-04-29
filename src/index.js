@@ -4,6 +4,8 @@ const bodyParse = require("body-parser")
 
 const sequelize = require("./database/db");
 
+require('./database/associations')
+
 app.use(express.json())
 app.use(bodyParse.urlencoded({ extended: true }))
 
@@ -12,7 +14,7 @@ app.listen(PORT, () => {
     console.log(`Servidor escuchando en puerto ${PORT} 😎`)
 
     sequelize
-        .sync({ force: false })
+        .sync({ force: true })
         .then(() => console.log("Conexion a la base de datos almacenes conectada con exito 👌👌"))
         .then(() => console.log("Tablas sincronizadas"))
         .catch((error) =>console.log("Error: "+error+"✖✖"))
