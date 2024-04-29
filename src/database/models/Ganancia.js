@@ -9,7 +9,7 @@ Ganancia.init({
         primaryKey: true,
         autoIncrement: true
     },
-    descripción: {
+    descripcion_ganancia: {
         type: DataTypes.STRING,
         allowNull: false
     },
@@ -17,7 +17,7 @@ Ganancia.init({
         type: DataTypes.FLOAT,
         allowNull: false
     },
-    fecha: {
+    fecha_ganancia: {
         type: DataTypes.DATE,
         allowNull: false
     }

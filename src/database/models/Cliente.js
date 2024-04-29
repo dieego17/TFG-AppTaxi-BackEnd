@@ -13,7 +13,7 @@ Cliente.init({
             key: 'id_usuario'
         }
     },
-    direccion: {
+    direccion_cliente: {
         type: DataTypes.STRING,
         allowNull: false
     },

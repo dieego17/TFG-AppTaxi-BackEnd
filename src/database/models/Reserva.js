@@ -9,15 +9,15 @@ Reserva.init({
         autoIncrement: true,
         allowNull: false
     },
-    fecha: {
+    fecha_reserva: {
         type: DataTypes.DATE,
         allowNull: false
     },
-    hora: {
+    hora_reserva: {
         type: DataTypes.TIME,
         allowNull: false
     },
-    estado: {
+    estado_reserva: {
         type: DataTypes.STRING,
         allowNull: false
     }

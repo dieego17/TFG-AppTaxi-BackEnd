@@ -8,15 +8,15 @@ Testimonio.init({
         primaryKey: true,
         autoIncrement: true
     },
-    mensaje: {
+    mensaje_testimonio: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    fecha: {
+    fecha_testimonio: {
         type: DataTypes.DATE,
         allowNull: false
     },
-    clasificacion: {
+    clasificacion_testimonio: {
         type: DataTypes.STRING,
         allowNull: false
     }

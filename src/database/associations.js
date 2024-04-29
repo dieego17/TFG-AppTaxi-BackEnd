@@ -1,4 +1,4 @@
-const Admin = require('./models/Admin');
+const Taxista = require('./models/Taxista');
 const Usuario = require('./models/Usuario');
 const Cliente = require('./models/Cliente');
 const Ganancia = require('./models/Ganancia');
@@ -10,21 +10,21 @@ const Testimonio = require('./models/Testimonio');
 const Reserva = require('./models/Reserva');
 
 
-// Asociación de Usuario con Admin
-Usuario.hasOne(Admin, { foreignKey: 'id_usuario' });
-Admin.belongsTo(Usuario, { foreignKey: 'id_usuario' });
+// Asociación de Usuario con Taxista
+Usuario.hasOne(Taxista, { foreignKey: 'id_usuario' });
+Taxista.belongsTo(Usuario, { foreignKey: 'id_usuario' });
 
 // Asociación de Usuario con Cliente
 Usuario.hasOne(Cliente, { foreignKey: 'id_usuario' });
 Cliente.belongsTo(Usuario, { foreignKey: 'id_usuario' });
 
-// Asociación de Admin con Ganancia
-Admin.hasMany(Ganancia, { foreignKey: 'id_admin' });
-Ganancia.belongsTo(Admin, { foreignKey: 'id_admin' });
+// Asociación de Taxista con Ganancia
+Taxista.hasMany(Ganancia, { foreignKey: 'id_taxista' });
+Ganancia.belongsTo(Taxista, { foreignKey: 'id_taxista' });
 
-// Asociación de Admin con Gasto
-Admin.hasMany(Gasto, { foreignKey: 'id_admin' });
-Gasto.belongsTo(Admin, { foreignKey: 'id_admin' });
+// Asociación de Taxista con Gasto
+Taxista.hasMany(Gasto, { foreignKey: 'id_taxista' });
+Gasto.belongsTo(Taxista, { foreignKey: 'id_taxista' });
 
 // Asociación de Cliente con Testimonio
 Cliente.hasMany(Testimonio, { foreignKey: 'id_cliente' });
@@ -47,9 +47,9 @@ Notificacion.belongsTo(Cliente, { foreignKey: 'id_cliente' });
 Reserva.hasOne(Notificacion, { foreignKey: 'id_reserva' });
 Notificacion.belongsTo(Reserva, { foreignKey: 'id_reserva' });
 
-// Asociación de Admin con Viaje
-Admin.hasMany(Viaje, { foreignKey: 'id_admin' });
-Viaje.belongsTo(Admin, { foreignKey: 'id_admin' });
+// Asociación de Taxista con Viaje
+Taxista.hasMany(Viaje, { foreignKey: 'id_taxista' });
+Viaje.belongsTo(Taxista, { foreignKey: 'id_taxista' });
 
 // Asociación de Viaje con Factura
 Viaje.hasOne(Factura, { foreignKey: 'id_viaje' });

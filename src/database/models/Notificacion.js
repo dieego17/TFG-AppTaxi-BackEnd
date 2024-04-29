@@ -8,11 +8,11 @@ Notificacion.init({
         primaryKey: true,
         autoIncrement: true
     },
-    mensaje: {
+    mensaje_notificacion: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    fecha: {
+    fecha_mensaje_notificacion: {
         type: DataTypes.DATE,
         allowNull: false
     }

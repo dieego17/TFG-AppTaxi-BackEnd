@@ -9,7 +9,7 @@ Gasto.init({
         primaryKey: true,
         autoIncrement: true
     },
-    descripción: {
+    descripcion_gasto: {
         type: DataTypes.STRING,
         allowNull: false
     },
@@ -17,7 +17,7 @@ Gasto.init({
         type: DataTypes.FLOAT,
         allowNull: false
     },
-    fecha: {
+    fecha_gasto: {
         type: DataTypes.DATE,
         allowNull: false
     }

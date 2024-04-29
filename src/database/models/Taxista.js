@@ -3,8 +3,8 @@ const { Model, DataTypes } = require("sequelize")
 const Usuario = require("./Usuario")
 
 
-class Admin extends Usuario {}
-Admin.init({
+class Taxista extends Usuario {}
+Taxista.init({
     id_usuario: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -22,15 +22,15 @@ Admin.init({
         type: DataTypes.STRING,
         allowNull: false
     },
-    calificacion: {
+    calificacion_taxista: {
         type: DataTypes.FLOAT,
         allowNull: true
     }
 }, {
     sequelize,
-    modelName: "admin",
+    modelName: "taxista",
     timestamps: false,
     freezeTableName: true
 });
 
-module.exports = Admin;
+module.exports = Taxista;

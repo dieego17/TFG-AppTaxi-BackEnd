@@ -8,27 +8,27 @@ Viaje.init({
         primaryKey: true,
         autoIncrement: true
     },
-    origen: {
+    origen_viaje: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    destino: {
+    destino_viaje: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    fecha: {
+    fecha_viaje: {
         type: DataTypes.DATE,
         allowNull: false
     },
-    hora: {
+    hora_viaje: {
         type: DataTypes.TIME,
         allowNull: false
     },
-    precio_total: {
+    precioTotal_viaje: {
         type: DataTypes.FLOAT,
         allowNull: false
     },
-    estado: {
+    estado_viaje: {
         type: DataTypes.INTEGER,
         allowNull: false
     }
