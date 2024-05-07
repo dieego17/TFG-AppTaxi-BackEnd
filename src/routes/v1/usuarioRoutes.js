@@ -2,6 +2,6 @@ const usuarioRouter = require("express").Router();
 
 const usuarioController = require("../../controllers/usuarioController");
 
-usuarioRouter.get("/", usuarioController.getAllUsuarios);
+usuarioRouter.post("/", usuarioController.loginUser);
 
 module.exports = usuarioRouter;
