@@ -27,7 +27,7 @@ Usuario.init({
     },
     rol: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     telefono: {
         type: DataTypes.STRING,
