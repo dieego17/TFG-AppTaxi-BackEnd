@@ -1,10 +1,15 @@
 const router = require("express").Router();
+const Usuario = require("../database/models/Usuario");
 const { jsonResponse } = require("../lib/jsonResponse");
+const bycrypt = require("bcrypt");
+
+const { createAccessToken, createRefreshToken } = require('../lib/jsonResponse');
+const { getUserInfo } = require("../lib/getUserInfo");
 
 
 
 // Ruta para logear un usuario
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
     // Obtener los datos del formulario
     const { correo_electronico, contraseña } = req.body;
 
@@ -15,21 +20,34 @@ router.post("/", (req, res) => {
         }));
     }
 
-    const accessToken = 'access_token';
-    const refreshToken = 'refresh_token';
-    const usuario = {
-        id: 1,
-        nombre: 'Juan',
-        apellidos: 'Pérez',
-        telefono: '1234567890',
-        correo_electronico: 'diego@correo.es'
-    }
+    // Comprobar si el usuario existe
+    const usuario = await Usuario.findOne({ where: { correo_electronico } });
+    // Si el usuario no existe, enviar un mensaje de error
+    if (!usuario) {
+        return res.status(400).json(jsonResponse(400, { 
+            message: "Usuario o contraseña incorrectas" 
+        }));
+    }else{
 
-    res.status(200).json(jsonResponse(200, {
-        usuario,
-        accessToken,
-        refreshToken,
-    }));
+        // Comprobar si la contraseña encriptada es correcta con la de la bbdd
+        const contraseñaValida = await bycrypt.compare(contraseña, usuario.contraseña);
+        if (!contraseñaValida) {
+            return res.status(400).json(jsonResponse(400, { 
+                message: "Usuario o contraseña incorrectas" 
+            }));
+        }else{
+            // Crear el token de acceso y el token de refresco
+            const accessToken = createAccessToken(usuario);
+            const refreshToken = await createRefreshToken(usuario);
+
+            // Enviar la respuesta con los tokens y la información del usuario
+            res.status(200).json(jsonResponse(200, {
+                usuario: getUserInfo(usuario),
+                accessToken,
+                refreshToken,
+            }));
+        }
+    }
 });
 
 module.exports = router;
