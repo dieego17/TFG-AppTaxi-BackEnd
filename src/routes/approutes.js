@@ -10,7 +10,7 @@ const logout = require('./logout')
 const token = require('./token');
 const authenticate = require("../auth/authenticate");
 
-router.use("/v1/usuarios", usuarioRouter)
+/* router.use("/v1/usuarios", usuarioRouter) */
 router.use("/v1/testimonios", testimonioRouter)
 
 router.use('/v1/usuarios', authenticate, usuario)

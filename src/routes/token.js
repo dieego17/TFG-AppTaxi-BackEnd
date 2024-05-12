@@ -1,5 +1,6 @@
 const getToken = require("../auth/getToken");
 const { verifyRefreshToken } = require("../auth/verifyToke");
+const Token = require("../database/models/Token");
 
 const router = require("express").Router();
 
@@ -25,6 +26,8 @@ router.post("/", async (req, res) => {
                 const accessToken = generateAccessToken(payload.usuario);
                 // Retornar el nuevo token de acceso
                 return res.json({ accessToken });
+            }else{
+                res.send("Token de refresco inválido");
             }
         } else {    
             res.send("Token de refresco no encontrado");

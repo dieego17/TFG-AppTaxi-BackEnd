@@ -1,6 +1,7 @@
 const { get } = require("../routes/user");
 const { verifyAccessToken } = require("./verifyToke");
 
+
 function authenticate(req, res, next) {
     const token = getToken(req.headers);
     if(token){

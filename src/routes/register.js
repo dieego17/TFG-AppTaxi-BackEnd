@@ -1,6 +1,5 @@
 const { jsonResponse } = require("../lib/jsonResponse");
 const router = require("express").Router();
-
 // Importar la librería bcrypt
 const bycrypt = require("bcrypt");
 

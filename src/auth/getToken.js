@@ -7,6 +7,8 @@ function getToken(headers) {
     if(parted.length === 2){
     // Retornar el token
       return parted[1]
+    }else{
+      return null
     }
 // Retornar nulo si el token no es del tipo Bearer
   }else{
