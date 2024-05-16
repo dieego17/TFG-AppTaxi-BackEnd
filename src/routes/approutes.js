@@ -5,6 +5,7 @@ const testimonioRouter = require("./v1/testimonioRoutes")
 const clienteRouter = require("./v1/clienteRoutes")
 const gananciasRouter = require("./v1/gananciasRoutes")
 const perdidaRouter = require("./v1/perdidaRouter")
+const facturasRouter = require("./v1/facturaRoutes")
 
 const login = require('./login')
 const register = require('./register')
@@ -17,6 +18,7 @@ router.use("/v1/testimonios", testimonioRouter)
 router.use("/v1/clientes", clienteRouter)
 router.use("/v1/ganancias", gananciasRouter)
 router.use("/v1/perdidas", perdidaRouter)
+router.use("/v1/facturas", facturasRouter)
 
 
 router.use('/v1/login', login)

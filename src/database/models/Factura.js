@@ -8,10 +8,6 @@ Factura.init({
         primaryKey: true,
         autoIncrement: true
     },
-    cantidad_total: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
     fecha_factura: {
         type: DataTypes.DATE,
         allowNull: false
