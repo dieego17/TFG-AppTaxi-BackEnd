@@ -8,6 +8,11 @@ Usuario.init({
         primaryKey: true,
         autoIncrement: true
     },
+    DNI:{
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
+    },
     nombre: {
         type: DataTypes.STRING,
         allowNull: false

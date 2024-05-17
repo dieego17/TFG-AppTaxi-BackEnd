@@ -18,6 +18,11 @@ Taxista.init({
         type: DataTypes.STRING,
         allowNull: false
     },
+    numero_cuenta:{
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
+    },
     vehiculo: {
         type: DataTypes.STRING,
         allowNull: false
