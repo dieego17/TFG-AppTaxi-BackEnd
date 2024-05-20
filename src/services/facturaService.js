@@ -27,6 +27,18 @@ const getAllFacturas = async () => {
     return facturas
 }
 
+const uploadPDF = async (id, file) => {
+    const factura = await Factura.findAll({
+        where: {
+            id_viaje: id
+        }
+    })
+    factura.pdf_factura = file.buffer
+    await factura.save()
+    return factura
+}
+
 module.exports = {
-    getAllFacturas
+    getAllFacturas,
+    uploadPDF
 }

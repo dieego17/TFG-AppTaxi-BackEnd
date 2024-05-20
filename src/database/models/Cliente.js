@@ -13,10 +13,6 @@ Cliente.init({
             key: 'id_usuario'
         }
     },
-    direccion_cliente: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
     metodo_pago: {
         type: DataTypes.STRING,
         allowNull: false

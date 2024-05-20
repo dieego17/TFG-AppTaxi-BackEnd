@@ -6,11 +6,11 @@ const Viaje = require('../database/models/Viaje')
 
 const findClientes = async (idTaxista) =>{
   const clientes = await Cliente.findAll({
-    attributes: ['id_usuario', 'direccion_cliente', 'metodo_pago'],
+    attributes: ['id_usuario', 'metodo_pago'],
     include: [
       {
         model: Usuario,
-        attributes: ['nombre', 'apellidos', 'correo_electronico', 'telefono'],
+        attributes: ['nombre', 'apellidos', 'correo_electronico', 'telefono', 'direccion_usuario'],
         required: true, // INNER JOIN
       },
       {

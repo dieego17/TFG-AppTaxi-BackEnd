@@ -26,6 +26,10 @@ Usuario.init({
         allowNull: false,
         unique: true
     },
+    direccion_usuario: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
     contraseña: {
         type: DataTypes.STRING,
         allowNull: false

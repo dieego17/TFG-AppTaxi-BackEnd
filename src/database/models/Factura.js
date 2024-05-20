@@ -11,7 +11,11 @@ Factura.init({
     fecha_factura: {
         type: DataTypes.DATE,
         allowNull: false
-    }
+    },
+    archivo_factura: {
+        type: DataTypes.BLOB('long'),
+        allowNull: false
+    },
 }, {
     sequelize,
     modelName: "factura",
