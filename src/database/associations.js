@@ -3,7 +3,6 @@ const Usuario = require('./models/Usuario');
 const Cliente = require('./models/Cliente');
 const Ganancia = require('./models/Ganancia');
 const Gasto = require('./models/Gasto');
-const Factura = require('./models/Factura');
 const Viaje = require('./models/Viaje');
 const Notificacion = require('./models/Notificacion');
 const Testimonio = require('./models/Testimonio');
@@ -51,7 +50,3 @@ Notificacion.belongsTo(Reserva, { foreignKey: 'id_reserva' });
 // Asociación de Taxista con Viaje
 Taxista.hasMany(Viaje, { foreignKey: 'id_taxista' });
 Viaje.belongsTo(Taxista, { foreignKey: 'id_taxista' });
-
-// Asociación de Viaje con Factura
-Viaje.hasOne(Factura, { foreignKey: 'id_viaje' });
-Factura.belongsTo(Viaje, { foreignKey: 'id_viaje' });

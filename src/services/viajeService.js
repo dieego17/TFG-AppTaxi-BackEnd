@@ -60,8 +60,29 @@ const getAllViajeCliente = async (id_viaje) => {
     }
 };
 
+const updateEstado = async (id_viaje, estado) => {
+
+    console.log("id_viaje", id_viaje);
+    console.log("estado", estado);
+
+    try {
+        const viaje = await Viaje.update({
+            estado_viaje: estado
+        }, {
+            where: {
+                id_viaje: id_viaje
+            }
+        });
+        return viaje;
+    } catch (error) {
+        console.error("Error al actualizar el estado del viaje:", error);
+        throw error;
+    }
+};
+
 
 module.exports = {
     getAllViajes,
-    getAllViajeCliente
+    getAllViajeCliente,
+    updateEstado
 };

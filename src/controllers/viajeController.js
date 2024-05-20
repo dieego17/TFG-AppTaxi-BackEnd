@@ -22,7 +22,21 @@ const getAllViajeCliente = async (req, res) => {
     }
 }
 
+
+const updateEstado = async (req, res) => {
+    const id_viaje = req.params.id_viaje; // Obtener id_viaje de los parámetros de la ruta
+    const { estado_viaje } = req.body; // Obtener estado_viaje del cuerpo de la solicitud
+
+    try {
+        await viajeService.updateEstado(id_viaje, estado_viaje); // Pasar id_viaje y estado_viaje a la función
+        res.status(200).json({ message: 'Estado actualizado correctamente' });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
 module.exports = {
     getAllViajes,
-    getAllViajeCliente
+    getAllViajeCliente,
+    updateEstado
 };

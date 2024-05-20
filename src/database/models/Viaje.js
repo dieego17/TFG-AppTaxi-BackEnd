@@ -29,7 +29,7 @@ Viaje.init({
         allowNull: false
     },
     estado_viaje: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false
     }
 }, {
