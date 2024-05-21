@@ -10,16 +10,14 @@ const getAllPerdidas = async (id_taxista) => {
     });
 
     if (!taxista) {
-        // Manejar el caso en que no se encuentre el taxista
         return null;
     }
 
-    // Ahora que tenemos el taxista, obtenemos todos sus gastos
     const gastos = await Gasto.findAll({
         where: {
-            id_taxista: id_taxista // Suponiendo que existe un campo id_taxista en el modelo Gasto
+            id_taxista: id_taxista 
         },
-        attributes: ['descripcion_gasto', 'gasto_total'] // Seleccionar solo los atributos deseados
+        attributes: ['descripcion_gasto', 'gasto_total']
     });
 
     return gastos;
@@ -35,7 +33,6 @@ const createPerdida = async (id_taxista, descripcion_gasto, gasto_total) => {
     });
     
     if (!taxista) {
-        // Manejar el caso en que no se encuentre el taxista
         return null;
     }
     

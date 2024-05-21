@@ -11,16 +11,14 @@ const getAllGanancias = async (id_taxista) =>{
     });
 
     if (!taxista) {
-        // Manejar el caso en que no se encuentre el taxista
         return null;
     }
 
-    // Ahora que tenemos el taxista, obtenemos todos sus gastos
     const ganancia = await Ganancias.findAll({
         where: {
-            id_taxista: id_taxista // Suponiendo que existe un campo id_taxista en el modelo Gasto
+            id_taxista: id_taxista 
         },
-        attributes: ['descripcion_ganancia', 'ganancia_total'] // Seleccionar solo los atributos deseados
+        attributes: ['id_ganancia','descripcion_ganancia', 'ganancia_total', 'fecha_ganancia']
     });
 
     return ganancia;
@@ -36,7 +34,6 @@ const createGanancia = async (id_taxista, descripcion_ganancia, ganancia_total) 
     });
     
     if (!taxista) {
-        // Manejar el caso en que no se encuentre el taxista
         return null;
     }
     

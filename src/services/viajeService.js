@@ -4,7 +4,8 @@ const Taxista = require('../database/models/Taxista');
 const Usuario = require('../database/models/Usuario');
 const Cliente = require('../database/models/Cliente');
 
-const getAllViajes = async (id_taxista, id_cliente) => {
+const getAllViajes = async (id_taxista, id_cliente, page = 1, limit = 4) => {
+    const offset = (page - 1) * limit;
     const viajes = await Viaje.findAll({
         include: [
             {
@@ -25,11 +26,14 @@ const getAllViajes = async (id_taxista, id_cliente) => {
         ],
         where: {
             id_taxista: id_taxista
-        }
+        },
+        limit: parseInt(limit), 
+        offset: parseInt(offset)
     });
     return viajes;
 };
 
+//GET para hacer el pdf
 const getAllViajeCliente = async (id_viaje) => {
     try {
         const viaje = await Viaje.findOne({
