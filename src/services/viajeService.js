@@ -84,9 +84,41 @@ const updateEstado = async (id_viaje, estado) => {
     }
 };
 
+const createViajeYReserva = async (id_taxista, id_cliente, origen_viaje, destino_viaje, fecha_viaje, hora_viaje, precioTotal_viaje, factura_viaje) => {
+    try {
+        // Crear el viaje
+        const newViaje = await Viaje.create({
+            id_taxista: id_taxista,
+            origen_viaje: origen_viaje,
+            destino_viaje: destino_viaje,
+            fecha_viaje: fecha_viaje,
+            hora_viaje: hora_viaje,
+            precioTotal_viaje: precioTotal_viaje,
+            factura_viaje: factura_viaje,
+            estado_viaje: 'Pendiente'
+        });
+
+        // Crear la reserva asociada al viaje
+        const newReserva = await Reserva.create({
+            id_cliente: id_cliente,
+            id_viaje: newViaje.id_viaje, // Asociar la reserva con el ID del viaje recién creado
+            fecha_reserva: new Date(),
+            hora_reserva: new Date(),
+            estado_reserva: 'Pendiente' 
+        });
+
+        return { viaje: newViaje, reserva: newReserva };
+    } catch (error) {
+        console.error("Error al crear el viaje y la reserva:", error);
+        throw error;
+    }
+};
+
+
 
 module.exports = {
     getAllViajes,
     getAllViajeCliente,
-    updateEstado
+    updateEstado,
+    createViajeYReserva
 };

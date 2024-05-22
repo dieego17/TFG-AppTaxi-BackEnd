@@ -24,7 +24,7 @@ const getAllPerdidas = async (id_taxista) => {
 }
 
 
-const createPerdida = async (id_taxista, descripcion_gasto, gasto_total) => {
+const createPerdida = async (id_taxista, descripcion_gasto, gasto_total, fecha_gasto) => {
     
     const taxista = await Taxista.findOne({
         where: {
@@ -40,7 +40,7 @@ const createPerdida = async (id_taxista, descripcion_gasto, gasto_total) => {
         id_taxista: id_taxista,
         descripcion_gasto: descripcion_gasto,
         gasto_total: gasto_total,
-        fecha_gasto: new Date()
+        fecha_gasto: fecha_gasto
     });
     
     return perdida;

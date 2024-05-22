@@ -31,7 +31,11 @@ Viaje.init({
     estado_viaje: {
         type: DataTypes.STRING,
         allowNull: false
-    }
+    },
+    factura_viaje: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
 }, {
     sequelize,
     modelName: "viaje",

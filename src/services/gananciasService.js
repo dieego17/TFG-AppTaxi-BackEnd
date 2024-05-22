@@ -25,7 +25,7 @@ const getAllGanancias = async (id_taxista) =>{
 
 }
 
-const createGanancia = async (id_taxista, descripcion_ganancia, ganancia_total) => {
+const createGanancia = async (id_taxista, descripcion_ganancia, ganancia_total, fecha_ganancia) => {
     
     const taxista = await Taxista.findOne({
         where: {
@@ -41,7 +41,7 @@ const createGanancia = async (id_taxista, descripcion_ganancia, ganancia_total) 
         id_taxista: id_taxista,
         descripcion_ganancia: descripcion_ganancia,
         ganancia_total: ganancia_total,
-        fecha_ganancia: new Date()
+        fecha_ganancia: fecha_ganancia
     });
     
     return ganancia;

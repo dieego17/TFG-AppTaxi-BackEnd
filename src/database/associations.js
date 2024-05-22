@@ -30,14 +30,13 @@ Gasto.belongsTo(Taxista, { foreignKey: 'id_taxista' });
 Cliente.hasMany(Testimonio, { foreignKey: 'id_cliente' });
 Testimonio.belongsTo(Cliente, { foreignKey: 'id_cliente' });
 
-
 // Asociación de Cliente con Reserva
 Cliente.hasMany(Reserva, { foreignKey: 'id_cliente' });
 Reserva.belongsTo(Cliente, { foreignKey: 'id_cliente' });
 
-// Asociación de Viaje con Reserva
-Viaje.hasMany(Reserva, { foreignKey: 'id_viaje' });
+// Asociación de Reserva con Viaje
 Reserva.belongsTo(Viaje, { foreignKey: 'id_viaje' });
+Viaje.hasOne(Reserva, { foreignKey: 'id_viaje' });
 
 // Asociación de Cliente con Notificacion
 Cliente.hasMany(Notificacion, { foreignKey: 'id_cliente' });

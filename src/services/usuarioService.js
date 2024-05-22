@@ -23,14 +23,6 @@ const findClientes = async (idTaxista) =>{
             attributes: ['origen_viaje', 'destino_viaje', 'fecha_viaje', 'hora_viaje', 'precioTotal_viaje', 'estado_viaje'],
             where: { id_taxista: idTaxista },
             required: true, // INNER JOIN
-            include: [
-              {
-                model: Taxista,
-                attributes: [],
-                where: { id_usuario: idTaxista },
-                required: true, // INNER JOIN
-              },
-            ],
           },
         ],
       },
@@ -39,8 +31,41 @@ const findClientes = async (idTaxista) =>{
 
   return clientes
 }
+
+const clienteFactura = async (idUsuario) => {
+  const ClienteFactura = await Usuario.findAll({
+    attributes:['nombre', 'apellidos', 'correo_electronico'],
+    include:[
+      {
+        model: Cliente,
+        atributtes:[],
+        include:[{
+          model: Reserva,
+          attributes:[],
+          include:[{
+            model: Viaje,
+            attributes:['origen_viaje', 'destino_viaje', 'fecha_viaje'],
+            where:{
+              factura_viaje: 'Si'
+            },
+            include:[{
+              model: Taxista,
+              atributtes:[],
+              where:{
+                id_usuario: idUsuario
+              }
+            }]
+          }]
+        }]
+      },
+    ]
+  })
+
+  return ClienteFactura
+}
     
 
 module.exports = {
-    findClientes
+    findClientes,
+    clienteFactura
 }
