@@ -10,7 +10,13 @@ const createPerdida = async (req, res) => {
     res.json(perdida);
 }
 
+const deletePerdida = async (req, res) => {
+    const perdida = await perdidaService.deletePerdida(req.params.id_perdida);
+    res.json(perdida);
+}
+
 module.exports = {
     getAllPerdidas,
-    createPerdida
+    createPerdida,
+    deletePerdida
 };

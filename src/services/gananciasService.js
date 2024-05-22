@@ -48,8 +48,20 @@ const createGanancia = async (id_taxista, descripcion_ganancia, ganancia_total) 
     
 }
 
+
+const deleteGanancia = async (id_ganancia) => {
+    const ganancia = await Ganancias.destroy({
+        where: {
+            id_ganancia: id_ganancia
+        }
+    });
+
+    return ganancia;
+}
+
 module.exports = {
     getAllGanancias,
-    createGanancia
+    createGanancia,
+    deleteGanancia
 }
 

@@ -17,7 +17,7 @@ const getAllPerdidas = async (id_taxista) => {
         where: {
             id_taxista: id_taxista 
         },
-        attributes: ['descripcion_gasto', 'gasto_total']
+        attributes: ['id_gasto', 'descripcion_gasto', 'gasto_total', 'fecha_gasto']
     });
 
     return gastos;
@@ -47,8 +47,19 @@ const createPerdida = async (id_taxista, descripcion_gasto, gasto_total) => {
     
 }
 
+const deletePerdida = async (id_perdida) => {
+    const perdida = await Gasto.destroy({
+        where: {
+            id_gasto: id_perdida
+        }
+    });
+
+    return perdida;
+}
+
 module.exports = {
     getAllPerdidas,
-    createPerdida
+    createPerdida,
+    deletePerdida
 }
 
