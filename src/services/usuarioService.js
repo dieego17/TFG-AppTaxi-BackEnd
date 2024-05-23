@@ -63,9 +63,28 @@ const clienteFactura = async (idUsuario) => {
 
   return ClienteFactura
 }
+
+const getAllTaxistas = async () => {
+  const AllTaxistas = await Usuario.findAll({
+    attributes: ['id_usuario', 'nombre', 'apellidos'],
+    include: [
+      {
+        model: Taxista,
+        attributes: ['num_licencia'],
+      },
+    ],
+    where: {
+      rol: 'admin'
+    }
+  });
+
+  return AllTaxistas;
+}
+
     
 
 module.exports = {
     findClientes,
-    clienteFactura
+    clienteFactura,
+    getAllTaxistas
 }

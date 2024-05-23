@@ -12,8 +12,14 @@ const clienteFactura = async (req, res) =>{
     res.json(clienteFactura)
 }
 
+const getAllTaxistas = async (req, res) =>{
+    const AllTaxistas = await usuarioService.getAllTaxistas()
+    res.json(AllTaxistas)
+}
+
 
 module.exports = {
     findClientes,
-    clienteFactura
+    clienteFactura,
+    getAllTaxistas
 }

@@ -12,7 +12,8 @@ const getAllViajes = async (id_taxista, id_cliente, page = 1, limit = 4) => {
                 model: Reserva,
                 attributes: [],
                 where: {
-                    id_cliente: id_cliente
+                    id_cliente: id_cliente,
+                    estado_reserva: 'Confirmada'
                 }
             },
             {
