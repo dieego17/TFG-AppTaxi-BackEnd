@@ -8,12 +8,12 @@ const perdidaRouter = require("./v1/perdidaRouter")
 const reservaRouter = require('./v1/reservaRoutes')
 const viajeRouter = require('./v1/viajeRoutes')
 
-const login = require('./login')
-const register = require('./register')
-const logout = require('./logout')
-const token = require('./token');
-/* const authenticate = require("../auth/authenticate"); */
+const loginRoutes = require('./v1/loginRoutes')
+const registerRoutes = require('./v1/registerRoutes')
+const logoutRoutes = require('./v1/logoutRoutes')
+const tokenRoutes = require('./v1/tokenRoutes');
 
+// Routes
 router.use("/v1/usuarios", usuarioRouter)
 router.use("/v1/testimonios", testimonioRouter)
 router.use("/v1/clientes", clienteRouter)
@@ -22,13 +22,12 @@ router.use("/v1/perdidas", perdidaRouter)
 router.use("/v1/reservas", reservaRouter)
 router.use("/v1/viajes", viajeRouter)
 
+// Auth
+router.use("/v1/login", loginRoutes)
+router.use("/v1/logout", logoutRoutes)
+router.use("/v1/register", registerRoutes)
+router.use("/v1/token", tokenRoutes)
 
-router.use('/v1/login', login)
-router.use('/v1/register', register)
 
-/* router.use(authenticate) */
-
-router.use('/v1/logout', logout)
-router.use('/v1/token', token)
 
 module.exports = router;

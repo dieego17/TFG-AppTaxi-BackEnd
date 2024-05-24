@@ -34,6 +34,7 @@ const getAllReservasByCliente = async(id_cliente) => {
         },
         include: {
             model: Viaje,
+            attributes: ['origen_viaje', 'destino_viaje'],
             where:{
                 estado_viaje:'Pendiente'
             }
