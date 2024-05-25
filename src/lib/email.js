@@ -14,13 +14,13 @@ const transporter = nodemailer.createTransport({
 // Función para enviar un correo electrónico de confirmación de reserva
 const sendEmailReserva = async (destinatario, detallesEmail) => {
     const mailOptions = {
-        from: process.env.EMAIL_USUSARIO,
+        from: process.env.EMAIL_USUARIO,
         to: destinatario,
         subject: 'Confirmación de reserva',
         html: `<h1>¡Gracias por reservar con nosotros!</h1>` +
             `<p>${detallesEmail}</p>`+
             `<p>¡Nos vemos pronto!</p>`+
-            `<p>Equipo de App Taxio</p>`+
+            `<p>Equipo de App Taxio.</p>`+
             `<img src="https://i.pinimg.com/564x/d5/7c/fd/d57cfd2b27ed2f84f3a8068bc1ae96eb.jpg" alt="Taxi" width="100" height="100">`
     };
 
@@ -40,10 +40,10 @@ const sendEmailCancelacion = async (destinatario, detallesEmail) => {
         to: destinatario,
         subject: 'Reserva cancelada',
         html: `<h1>¡Esperamos verte pronto!</h1>` +
-            `<p>Detalles de la reserva:</p>`+
+            `<p>Detalles de la reserva cancelada:</p>`+
             `<p>${detallesEmail}</p>`+
             `<p>¡Nos vemos pronto!</p>`+
-            `<p>Equipo de App Taxio</p>`+
+            `<p>Equipo de App Taxio.</p>`+
             `<img src="https://i.pinimg.com/564x/d5/7c/fd/d57cfd2b27ed2f84f3a8068bc1ae96eb.jpg" alt="Taxi" width="100" height="100">`
     };
 
