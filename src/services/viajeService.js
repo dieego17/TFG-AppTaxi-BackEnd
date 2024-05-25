@@ -3,6 +3,7 @@ const Reserva = require('../database/models/Reserva');
 const Taxista = require('../database/models/Taxista');
 const Usuario = require('../database/models/Usuario');
 const Cliente = require('../database/models/Cliente');
+const sendEmailReserva = require('../lib/email');
 
 //GET para obtener todos los viajes de un taxista
 const getAllViajes = async (id_taxista, id_cliente, page = 1, limit = 4) => {
@@ -130,6 +131,20 @@ const createViajeYReserva = async (id_taxista, id_cliente, origen_viaje, destino
                 estado_reserva: 'Pendiente' 
             });
 
+            // Obtener los detalles del cliente
+            const usuario = await Usuario.findOne({ where: { id_usuario: id_cliente } });
+
+            // Enviar un correo electrónico al cliente con los detalles de la reserva
+            const detallesEmail = `
+            <strong>Origen:</strong> ${origen_viaje} <br>
+            <strong>Destino:</strong> ${destino_viaje}<br>
+            <strong>Fecha:</strong> ${fecha_viaje}<br>
+            <strong>Hora:</strong> ${hora_viaje}<br>
+            <strong>Precio:</strong> ${precioTotal_viaje}€`;
+
+            // Llamar a la funcion sendEmail para enviar el correo
+            sendEmailReserva(usuario.correo_electronico, detallesEmail);
+
             return { viaje: newViaje, reserva: newReserva };
 
         }
@@ -148,10 +163,11 @@ const getAllViajesCliente = async (id_cliente) => {
                 {
                     model: Reserva,
                     where: {
-                        id_cliente: id_cliente
+                        id_cliente: id_cliente,
+                        estado_reserva: 'Confirmada'
                     }
                 }
-            ]
+            ],
         });
         return viajes;
     } catch (error) {
@@ -192,7 +208,11 @@ const getOneViajeRuta = async (id_viaje) => {
         const viaje = await Viaje.findOne({
             where: {
                 id_viaje: id_viaje
-            }
+            },
+            include:[{
+                model: Reserva,
+                attributes: ['id_cliente']
+            }]
         });
         return viaje;
     } catch (error) {

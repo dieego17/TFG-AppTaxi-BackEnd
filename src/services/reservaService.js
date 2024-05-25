@@ -68,7 +68,6 @@ const updateReserva = async (id_reserva, estado_reserva) => {
 
 //Funcion para eliminar una reserva y viaje
 const deleteReservaViaje = async (id_reserva) => {
-    const deleteReserva = await Reserva.findByPk(id_reserva);
 
     if (!deleteReserva) {
         throw new Error('No se encontró la reserva');
