@@ -32,7 +32,7 @@ Viaje.init({
         type: DataTypes.STRING,
         allowNull: false
     },
-    factura_viaje: {
+    metodo_pago: {
         type: DataTypes.STRING,
         allowNull: false
     },

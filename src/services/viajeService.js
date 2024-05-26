@@ -3,7 +3,7 @@ const Reserva = require('../database/models/Reserva');
 const Taxista = require('../database/models/Taxista');
 const Usuario = require('../database/models/Usuario');
 const Cliente = require('../database/models/Cliente');
-const sendEmailReserva = require('../lib/email');
+const { sendEmailReserva } = require('../lib/email');
 
 //GET para obtener todos los viajes de un taxista
 const getAllViajes = async (id_taxista, id_cliente, page = 1, limit = 4) => {
@@ -89,7 +89,7 @@ const updateEstado = async (id_viaje, estado) => {
 };
 
 //POST para crear un viaje
-const createViajeYReserva = async (id_taxista, id_cliente, origen_viaje, destino_viaje, fecha_viaje, hora_viaje, precioTotal_viaje, factura_viaje) => {
+const createViajeYReserva = async (id_taxista, id_cliente, origen_viaje, destino_viaje, fecha_viaje, hora_viaje, precioTotal_viaje, metodo_pago) => {
     
     // Formatear la fecha y la hora para que coincidan con el formato de la base de datos
     const formatFecha = new Date(fecha_viaje);
@@ -118,7 +118,7 @@ const createViajeYReserva = async (id_taxista, id_cliente, origen_viaje, destino
                 fecha_viaje: formatFecha,
                 hora_viaje: formatHora,
                 precioTotal_viaje: precioTotal_viaje,
-                factura_viaje: factura_viaje,
+                metodo_pago: metodo_pago,
                 estado_viaje: 'Pendiente'
             });
 
@@ -140,7 +140,8 @@ const createViajeYReserva = async (id_taxista, id_cliente, origen_viaje, destino
             <strong>Destino:</strong> ${destino_viaje}<br>
             <strong>Fecha:</strong> ${fecha_viaje}<br>
             <strong>Hora:</strong> ${hora_viaje}<br>
-            <strong>Precio:</strong> ${precioTotal_viaje}€`;
+            <strong>Precio:</strong> ${precioTotal_viaje}€<br>
+            <strong>Estado del pago:</strong> ${metodo_pago}<br>`;
 
             // Llamar a la funcion sendEmail para enviar el correo
             sendEmailReserva(usuario.correo_electronico, detallesEmail);

@@ -32,6 +32,7 @@ const findClientes = async (idTaxista) =>{
   return clientes
 }
 
+//Funcion para obtener los datos del cliente para la factura
 const clienteFactura = async (idUsuario) => {
   const ClienteFactura = await Usuario.findAll({
     attributes:['nombre', 'apellidos', 'correo_electronico'],
@@ -45,9 +46,6 @@ const clienteFactura = async (idUsuario) => {
           include:[{
             model: Viaje,
             attributes:['origen_viaje', 'destino_viaje', 'fecha_viaje'],
-            where:{
-              factura_viaje: 'Si'
-            },
             include:[{
               model: Taxista,
               atributtes:[],
@@ -64,6 +62,7 @@ const clienteFactura = async (idUsuario) => {
   return ClienteFactura
 }
 
+//Funcion para obtener todos los taxistas
 const getAllTaxistas = async () => {
   const AllTaxistas = await Usuario.findAll({
     attributes: ['id_usuario', 'nombre', 'apellidos'],
@@ -81,10 +80,28 @@ const getAllTaxistas = async () => {
   return AllTaxistas;
 }
 
+
+const getOneTaxista = async (id) => {
+  const taxista = await Usuario.findOne({
+    attributes: ['id_usuario', 'nombre', 'apellidos', 'correo_electronico', 'telefono', 'direccion_usuario', 'DNI'],
+    include: [
+      {
+        model: Taxista,
+        attributes: ['num_licencia', 'numero_cuenta'],
+      },
+    ],
+    where: {
+      id_usuario: id
+    }
+  });
+
+  return taxista;
+}
     
 
 module.exports = {
     findClientes,
     clienteFactura,
-    getAllTaxistas
+    getAllTaxistas,
+    getOneTaxista
 }

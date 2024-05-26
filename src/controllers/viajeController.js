@@ -41,11 +41,11 @@ const updateEstado = async (req, res) => {
 
 //POST para crear un viaje
 const createViaje = async (req, res) => {
-    const { id_taxista, origen_viaje, destino_viaje, fecha_viaje, hora_viaje, precioTotal_viaje, factura_viaje } = req.body;
+    const { id_taxista, origen_viaje, destino_viaje, fecha_viaje, hora_viaje, precioTotal_viaje, metodo_pago } = req.body;
     const id_cliente = parseInt(req.params.id_cliente);
 
     try {
-        const { viaje, reserva } = await viajeService.createViajeYReserva(id_taxista, id_cliente, origen_viaje, destino_viaje, fecha_viaje, hora_viaje, precioTotal_viaje, factura_viaje);
+        const { viaje, reserva } = await viajeService.createViajeYReserva(id_taxista, id_cliente, origen_viaje, destino_viaje, fecha_viaje, hora_viaje, precioTotal_viaje, metodo_pago);
         res.status(201).json({ message: 'Viaje creado correctamente', viaje, reserva });
     } catch (error) {
         res.status(500).json({ message: error.message });

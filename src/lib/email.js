@@ -1,6 +1,5 @@
 const nodemailer = require('nodemailer');
 
-
 // Configuración del transporte
 const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -21,14 +20,12 @@ const sendEmailReserva = async (destinatario, detallesEmail) => {
             `<p>${detallesEmail}</p>`+
             `<p>¡Nos vemos pronto!</p>`+
             `<p>Equipo de App Taxio.</p>`+
-            `<img src="https://i.pinimg.com/564x/d5/7c/fd/d57cfd2b27ed2f84f3a8068bc1ae96eb.jpg" alt="Taxi" width="100" height="100">`
+            `<img src="../assets/images/logo.png" alt="Taxi" width="100" height="100">`
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
             console.log('Error al enviar el correo:', error);
-        } else {
-            console.log('Correo enviado:', info.response);
         }
     });
 }
@@ -44,15 +41,13 @@ const sendEmailCancelacion = async (destinatario, detallesEmail) => {
             `<p>${detallesEmail}</p>`+
             `<p>¡Nos vemos pronto!</p>`+
             `<p>Equipo de App Taxio.</p>`+
-            `<img src="https://i.pinimg.com/564x/d5/7c/fd/d57cfd2b27ed2f84f3a8068bc1ae96eb.jpg" alt="Taxi" width="100" height="100">`
+            `<img src="../assets/images/logo.png" alt="Taxi" width="100" height="100">`
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
             console.log('Error al enviar el correo:', error);
-        } else {
-            console.log('Correo enviado:', info.response);
-        }
+        } 
     });
 }
 

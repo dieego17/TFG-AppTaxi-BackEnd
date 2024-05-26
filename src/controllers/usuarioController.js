@@ -18,8 +18,16 @@ const getAllTaxistas = async (req, res) =>{
 }
 
 
+const getOneTaxista = async (req, res) => {
+    const { id } = req.params;
+    const taxista = await usuarioService.getOneTaxista(id);
+    res.json(taxista);
+}
+
+
 module.exports = {
     findClientes,
     clienteFactura,
-    getAllTaxistas
+    getAllTaxistas,
+    getOneTaxista
 }
