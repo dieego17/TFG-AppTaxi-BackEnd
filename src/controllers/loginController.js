@@ -1,30 +1,35 @@
-const Usuarios = require('../database/models/Usuario');
-
+const loginService = require('../services/loginService');
 const jwt = require('jsonwebtoken');
 
+// Función para iniciar sesión
 const login = async (req, res) => {
-    // recibimos los datos del usuario a traves del frontend
+    // Obtener el correo electrónico y la contraseña del cuerpo de la petición
     const { correo_electronico, contraseña } = req.body;
 
-    console.log('correo_electronico', correo_electronico);
-    console.log('contraseña', contraseña);
+    // Buscar al usuario en la base de datos
+    const usuario = await loginService.login(correo_electronico, contraseña);
 
+    // Si el usuario no existe, devolver un mensaje de error
+    if (!usuario) {
+        return res.status(401).json({
+            message: "Usuario o contraseña incorrecta"
+        });
+    }else{
 
-    const usuario = await Usuarios.findOne({ 
-        where: { correo_electronico, contraseña },
-        attributes:['id_usuario', 'rol', 'nombre', 'apellidos'] 
-    });
+        // Crear un token con la información del usuario
+        const token = jwt.sign({
+            id: usuario.id,
+            correo_electronico: usuario.correo_electronico,
+            nombre: usuario.nombre,
+            apellidos: usuario.apellidos,
+            rol: usuario.rol
+        }, process.env.JWT_SECRET, {
+            expiresIn: '1h'
+        });
 
-    // si el usuario existe, generamos un token
-    if (usuario) {
-        const token = jwt.sign({ usuario }, 'appTaxio', { expiresIn: '3m' });
-
-        res.status(200).json({ token });
-    } else {
-        res.status(401).json({ message: 'Usuario no autenticado' });
+        return res.send({token})
     }
-}
-
+};
 
 module.exports = {
     login

@@ -11,8 +11,8 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "bcrypt": "^5.1.1",
-    "bcryptjs": "^2.4.3",
+    "bcrypt": "5.1.1",
+    "bcryptjs": "2.4.3",
     "cookie-parser": "1.4.6",
     "cors": "2.8.5",
     "dotenv": "16.4.5",
@@ -20,7 +20,7 @@
     "express-session": "1.18.0",
     "jsonwebtoken": "9.0.2",
     "mysql2": "3.9.7",
-    "nodemailer": "^6.9.13",
+    "nodemailer": "6.9.13",
     "sequelize": "6.37.3"
   },
   "devDependencies": {

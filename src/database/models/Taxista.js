@@ -26,10 +26,6 @@ Taxista.init({
     vehiculo: {
         type: DataTypes.STRING,
         allowNull: false
-    },
-    calificacion_taxista: {
-        type: DataTypes.FLOAT,
-        allowNull: true
     }
 }, {
     sequelize,

@@ -92,8 +92,6 @@ const deleteReservaViaje = async (id_reserva) => {
         }
     );
 
-    console.log(deleteReserva);
-
    // Función para formatear la fecha
   const formatearFecha = (fecha) => {
     const date = new Date(fecha);
