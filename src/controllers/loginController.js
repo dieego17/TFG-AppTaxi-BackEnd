@@ -18,7 +18,7 @@ const login = async (req, res) => {
 
         // Crear un token con la información del usuario
         const token = jwt.sign({
-            id: usuario.id,
+            id_usuario: usuario.id_usuario,
             correo_electronico: usuario.correo_electronico,
             nombre: usuario.nombre,
             apellidos: usuario.apellidos,
