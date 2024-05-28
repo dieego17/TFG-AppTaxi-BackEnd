@@ -3,10 +3,9 @@ const viajeService = require('../services/viajeService');
 //GET para obtener todos los viajes de un taxista
 const getAllViajes = async (req, res) => {
     const { id_cliente, id_taxista } = req.params;
-    const { page = 1, limit = 4 } = req.query;
 
     try {
-        const viajes = await viajeService.getAllViajes(id_taxista, id_cliente, page, limit);
+        const viajes = await viajeService.getAllViajes(id_taxista, id_cliente);
         res.status(200).json(viajes);
     } catch (error) {
         res.status(500).json({ message: error.message });

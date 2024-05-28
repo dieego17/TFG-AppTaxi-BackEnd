@@ -6,8 +6,7 @@ const Cliente = require('../database/models/Cliente');
 const { sendEmailReserva } = require('../lib/email');
 
 //GET para obtener todos los viajes de un taxista
-const getAllViajes = async (id_taxista, id_cliente, page = 1, limit = 4) => {
-    const offset = (page - 1) * limit;
+const getAllViajes = async (id_taxista, id_cliente) => {
     const viajes = await Viaje.findAll({
         include: [
             {
@@ -29,9 +28,7 @@ const getAllViajes = async (id_taxista, id_cliente, page = 1, limit = 4) => {
         ],
         where: {
             id_taxista: id_taxista
-        },
-        limit: parseInt(limit), 
-        offset: parseInt(offset)
+        }
     });
     return viajes;
 };
