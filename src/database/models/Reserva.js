@@ -24,9 +24,6 @@ Reserva.init({
         validate: {
             notNull: {
                 msg: "El campo fecha_reserva no puede ser nulo"
-            },
-            isDate: {
-                msg: "El campo fecha_reserva debe ser una fecha válida"
             }
         }
     },
@@ -36,9 +33,6 @@ Reserva.init({
         validate: {
             notNull: {
                 msg: "El campo hora_reserva no puede ser nulo"
-            },
-            isTime: {
-                msg: "El campo hora_reserva debe ser una hora válida" 
             }
         }
     },

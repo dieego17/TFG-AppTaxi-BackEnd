@@ -50,9 +50,6 @@ Viaje.init({
         validate: {
             notNull: {
                 msg: "El campo fecha_viaje no puede ser nulo"
-            },
-            isDate: {
-                msg: "El campo fecha_viaje debe ser una fecha válida"
             }
         }
     },
@@ -62,9 +59,6 @@ Viaje.init({
         validate: {
             notNull: {
                 msg: "El campo hora_viaje no puede ser nulo"
-            },
-            isTime: {
-                msg: "El campo hora_viaje debe ser una hora válida"
             }
         }
     },

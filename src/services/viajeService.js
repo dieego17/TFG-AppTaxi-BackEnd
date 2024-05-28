@@ -70,9 +70,6 @@ const getAllViajeCliente = async (id_viaje) => {
 //UPDATE para cambiar el estado del viaje
 const updateEstado = async (id_viaje, estado) => {
 
-    console.log("id_viaje", id_viaje);
-    console.log("estado", estado);
-
     try {
         const viaje = await Viaje.update({
             estado_viaje: estado
@@ -108,6 +105,28 @@ const createViajeYReserva = async (id_taxista, id_cliente, origen_viaje, destino
         // Si el taxista ya tiene un viaje en la misma fecha y hora, lanzar un error
         if (viajeExistente) {
             throw new Error("El taxista ya tiene un viaje en la misma fecha y hora");
+
+            
+        }
+        //comprobar que ese usuario no tenga otro viaje ese mismo dia y hora con otro taxista
+        const viajeExistenteCliente = await Viaje.findOne({
+            include: [
+                {
+                    model: Reserva,
+                    where: {
+                        id_cliente: id_cliente
+                    }
+                }
+            ],
+            where: {
+                fecha_viaje: formatFecha,
+                hora_viaje: formatHora
+            }
+        });
+
+        // Si el cliente ya tiene un viaje en la misma fecha y hora, lanzar un error
+        if (viajeExistenteCliente) {
+            throw new Error("El cliente ya tiene un viaje en la misma fecha y hora");
         }else{
 
             // Crear el viaje

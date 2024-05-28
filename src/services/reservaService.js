@@ -6,7 +6,7 @@ const Usuario = require('../database/models/Usuario');
 const { sendEmailCancelacion } = require('../lib/email');
 
 //Funcion para conseguir todas las reservas de un cliente
-const getAllReservas = async (id_cliente, id_taxista, page = 1, limit = 4) => {
+const getAllReservas = async (id_cliente, id_taxista, page = 1, limit = 3) => {
     const offset = (page - 1) * limit;
     const reservas = await Reserva.findAll({
         where: {
@@ -14,13 +14,11 @@ const getAllReservas = async (id_cliente, id_taxista, page = 1, limit = 4) => {
         },
         include: {
             model: Viaje,
-            attributes: [],
+            where: {
+                id_taxista: id_taxista
+            },
             include: {
-                model: Taxista,
-                where: {
-                    id_usuario: id_taxista
-                },
-                attributes: []
+                model: Taxista
             }
         },
         offset,
@@ -28,6 +26,8 @@ const getAllReservas = async (id_cliente, id_taxista, page = 1, limit = 4) => {
     });
     return reservas;
 };
+
+
 
 //Funcion para conseguir todas las reservas de un cliente que no esten los viajes hechos
 const getAllReservasByCliente = async(id_cliente) => {
