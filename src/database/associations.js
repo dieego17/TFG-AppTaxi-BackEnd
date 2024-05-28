@@ -6,7 +6,6 @@ const Gasto = require('./models/Gasto');
 const Viaje = require('./models/Viaje');
 const Testimonio = require('./models/Testimonio');
 const Reserva = require('./models/Reserva');
-const Token = require('./models/Token');
 
 
 // Asociación de Usuario con Taxista
