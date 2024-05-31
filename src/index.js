@@ -4,8 +4,9 @@ const bodyParse = require("body-parser")
 const cors = require("cors")
 const session = require('express-session')
 
-//configurar cors
-app.use(cors())
+app.use(cors({
+    origin: 'http://localhost:5173' 
+  }));
 
 //configurar dotenv
 require('dotenv').config()
