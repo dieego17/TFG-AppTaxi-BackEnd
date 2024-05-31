@@ -86,7 +86,7 @@ Viaje.init({
                 msg: "El campo estado_viaje no puede ser nulo"
             },
             isIn: {
-                args: [['Pendiente', 'Confirmado', 'Cancelado']],
+                args: [['Pendiente', 'Finalizado', 'Cancelado']],
                 msg: "El campo estado_viaje debe ser uno de 'Pendiente', 'Confirmado' o 'Cancelado'"
             }
         }
