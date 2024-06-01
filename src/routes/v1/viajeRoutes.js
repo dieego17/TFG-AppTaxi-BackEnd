@@ -24,4 +24,7 @@ viajeRouter.get('/detalles-taxista/:id_viaje', viajeController.getDetalleViaje);
 //GET para obtener un viaje y hacer la ruta
 viajeRouter.get('/detalles-ruta/:id_viaje', viajeController.getOneViajeRuta);
 
+//DELETE para cancelar un viaje por parte del taxista
+viajeRouter.delete('/:id_viaje', viajeController.cancelarViajeTaxista);
+
 module.exports = viajeRouter;

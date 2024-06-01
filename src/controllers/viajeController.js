@@ -87,6 +87,18 @@ const getOneViajeRuta = async (req, res) => {
     }
 }
 
+//DELETE para cancelar un viaje por parte del taxista
+const cancelarViajeTaxista = async (req, res) => {
+    const { id_viaje } = req.params;
+
+    try {
+        await viajeService.cancelarViajeTaxista(id_viaje);
+        res.status(200).json({ message: 'Viaje cancelado correctamente' });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
 module.exports = {
     getAllViajes,
     getAllViajeCliente,
@@ -94,5 +106,6 @@ module.exports = {
     createViaje,
     getAllViajesCliente,
     getDetalleViaje,
-    getOneViajeRuta
+    getOneViajeRuta,
+    cancelarViajeTaxista
 };

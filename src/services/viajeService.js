@@ -4,6 +4,7 @@ const Taxista = require('../database/models/Taxista');
 const Usuario = require('../database/models/Usuario');
 const Cliente = require('../database/models/Cliente');
 const { sendEmailReserva } = require('../lib/email');
+const { sendEmailCancelacionTaxista } = require('../lib/email');
 
 //GET para obtener todos los viajes de un taxista
 const getAllViajes = async (id_taxista, id_cliente) => {
@@ -28,7 +29,8 @@ const getAllViajes = async (id_taxista, id_cliente) => {
         ],
         where: {
             id_taxista: id_taxista
-        }
+        },
+        order: [['fecha_viaje', 'ASC']]
     });
     return viajes;
 };
@@ -239,6 +241,72 @@ const getOneViajeRuta = async (id_viaje) => {
 }
 
 
+// DELETE para cancelar un viaje por parte del taxista
+const cancelarViajeTaxista = async (id_viaje) => {
+    try {
+
+        const formatoFecha = (fecha) => {
+            return new Date(fecha).toLocaleDateString();
+        };
+
+        const findViaje = await Viaje.findOne({
+            where: {
+                id_viaje: id_viaje
+            }
+        });
+
+         // Obtener los detalles del cliente
+         const reserva = await Reserva.findOne({
+            where: {
+                id_viaje: id_viaje
+            },
+            include: [
+                {
+                    model: Cliente,
+                    include: {
+                        model: Usuario,
+                        attributes: ['correo_electronico']
+                    }
+                }
+            ]
+        });
+
+
+        // Cancelar la reserva asociada al viaje  
+        const reservaCancelada = await Reserva.destroy({
+            where: {
+                id_viaje: id_viaje
+            }
+        });
+
+        // Cancelar el viaje
+        const viajeCancelado = await Viaje.destroy({
+            where: {
+                id_viaje: id_viaje
+            }
+        
+        });
+
+        // Enviar un correo electrónico al cliente con los detalles de la reserva cancelada
+        const detallesEmail = `
+        <strong>Origen:</strong> ${findViaje.origen_viaje} <br>
+        <strong>Destino:</strong> ${findViaje.destino_viaje}<br>
+        <strong>Fecha:</strong> ${formatoFecha(findViaje.fecha_viaje)}<br>
+        <strong>Hora:</strong> ${findViaje.hora_viaje}<br>
+        <strong>Precio:</strong> ${findViaje.precioTotal_viaje}€<br>
+        <strong>Estado del pago:</strong> ${findViaje.metodo_pago}<br>`;
+
+        // Llamar a la funcion sendEmail para enviar el correo
+        sendEmailCancelacionTaxista(reserva.cliente.usuario.correo_electronico, detallesEmail);
+
+        return viajeCancelado;
+    } catch (error) {
+        console.error("Error al cancelar el viaje:", error);
+        throw error;
+    }
+}
+
+
 module.exports = {
     getAllViajes,
     getAllViajeCliente,
@@ -246,5 +314,6 @@ module.exports = {
     createViajeYReserva,
     getAllViajesCliente,
     getDetalleViaje,
-    getOneViajeRuta
+    getOneViajeRuta,
+    cancelarViajeTaxista
 };

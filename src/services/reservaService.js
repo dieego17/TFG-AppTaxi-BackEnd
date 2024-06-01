@@ -19,7 +19,8 @@ const getAllReservas = async (id_cliente, id_taxista) => {
             include: {
                 model: Taxista
             }
-        }
+        },
+        order: [['fecha_reserva', 'DESC']]
     });
     return reservas;
 };

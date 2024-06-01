@@ -52,7 +52,35 @@ const sendEmailCancelacion = async (destinatario, detallesEmail) => {
     });
 }
 
+const sendEmailCancelacionTaxista = async (destinatario, detallesEmail) => {
+    const mailOptions = {
+        from: process.env.EMAIL_USUARIO,
+        to: destinatario,
+        subject: 'Cancelación de Reserva de Taxi',
+        html: `<h1>El taxita cancelo su reserva.</h1>` +
+                `<p>Lamento informarle que su reserva de taxi ha sido cancelada por motivos imprevistos.
+                 Le pedimos disculpas por cualquier inconveniente que esto pueda ocasionar.</p>`+
+                `<p>Puede reprogramar el viaje con otro taxista. Estaremos encantados
+                de recibirle.</p>`+
+                `<p>Detalles de la reserva cancelada:</p>`+
+                `<p>${detallesEmail}</p>`+
+                `<p>¡Nos vemos pronto!</p>`+
+                `<p>Equipo de App Taxio.</p>`+
+                `<img src="https://drive.google.com/uc?export=view&id=1XGFRQL3gMfnpufQD1IssGzqgTk6lZD2P" alt="Taxi" width="100" height="100">`
+
+
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.log('Error al enviar el correo:', error);
+        }
+    });
+}
+
+
 module.exports = {
     sendEmailCancelacion,
-    sendEmailReserva
+    sendEmailReserva,
+    sendEmailCancelacionTaxista
 }
