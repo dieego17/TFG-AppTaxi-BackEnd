@@ -187,6 +187,7 @@ const getAllViajesCliente = async (id_cliente) => {
                     }
                 }
             ],
+            order: [['fecha_viaje', 'ASC']]
         });
         return viajes;
     } catch (error) {
