@@ -26,6 +26,7 @@ Taxista.init({
     num_licencia: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
         validate: {
             notNull: {
                 msg: "El campo num_licencia no puede ser nulo"

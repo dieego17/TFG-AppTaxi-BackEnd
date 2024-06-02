@@ -24,10 +24,23 @@ const getOneTaxista = async (req, res) => {
     res.json(taxista);
 }
 
+const cambiarContraseña = async (req, res) => {
+    const { correo_electronico, contraseña } = req.body;
+
+    try {
+        const result = await usuarioService.cambiarContraseña(correo_electronico, contraseña);
+        res.json(result);
+    } catch (error) {
+        console.error("Error al cambiar la contraseña:", error);
+        res.status(500).json({ error: "Error interno del servidor" });
+    }
+}
+
 
 module.exports = {
     findClientes,
     clienteFactura,
     getAllTaxistas,
-    getOneTaxista
+    getOneTaxista,
+    cambiarContraseña
 }

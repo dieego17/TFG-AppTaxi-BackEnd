@@ -104,7 +104,6 @@ const createViajeYReserva = async (id_taxista, id_cliente, origen_viaje, destino
         // Si el taxista ya tiene un viaje en la misma fecha y hora, lanzar un error
         if (viajeExistente) {
             throw new Error("El taxista ya tiene un viaje en la misma fecha y hora");
-
             
         }
         //comprobar que ese usuario no tenga otro viaje ese mismo dia y hora con otro taxista
@@ -125,7 +124,7 @@ const createViajeYReserva = async (id_taxista, id_cliente, origen_viaje, destino
 
         // Si el cliente ya tiene un viaje en la misma fecha y hora, lanzar un error
         if (viajeExistenteCliente) {
-            throw new Error("El cliente ya tiene un viaje en la misma fecha y hora");
+           return {message: "Ya tienes un viaje en la misma fecha y hora"};
         }else{
 
             // Crear el viaje

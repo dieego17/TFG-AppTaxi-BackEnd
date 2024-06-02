@@ -3,6 +3,7 @@ const Taxista = require('../database/models/Taxista');
 const Cliente = require('../database/models/Cliente');
 const bcrypt = require('bcryptjs');
 
+// Generar Licencia Taxista de manera aleatoria
 function generarLicencia() {
     function numeroAleatorio(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -29,14 +30,17 @@ const createTaxista = async (nombre, apellidos, telefono, correo_electronico, co
     const usuario = await Usuario.findOne({ where: { correo_electronico: correo_electronico } });
 
     if (usuario) {
-        console.log('El correo electrónico ya está registrado:', usuario);
-        return { error: 'El correo electrónico ya está registrado' };
+        return { error: 'Ya existe una cuenta' };
+    }
+
+    const usuarioDNI = await Usuario.findOne({ where: { DNI: DNI } });
+
+    if (usuarioDNI) {
+        return { error: 'Ya existe una cuenta' };
     }
 
     const num_licencia = generarLicencia();
     const contraseñaEncriptada = await bcrypt.hash(contraseña, 10);
-
-    console.log('Generando licencia:', num_licencia);
 
     const newUsuario = await Usuario.create({
         nombre: nombre,
@@ -49,17 +53,13 @@ const createTaxista = async (nombre, apellidos, telefono, correo_electronico, co
         DNI: DNI
     });
 
-    console.log('Usuario creado:', newUsuario);
-    console.log(newUsuario.id_usuario)
 
     const newTaxista = await Taxista.create({
         num_licencia: num_licencia,
         numero_cuenta: numero_cuenta,
         vehiculo: vehiculo,
-        id_usuario: newUsuario.id_usuario // Utilizando directamente el ID del nuevo usuario
+        id_usuario: newUsuario.id_usuario 
     });
-
-    console.log('Taxista creado:', newTaxista);
 
     return newTaxista;
 }
@@ -69,9 +69,15 @@ const createCliente = async (nombre, apellidos, telefono, correo_electronico, co
     const usuario = await Usuario.findOne({ where: { correo_electronico: correo_electronico } });
 
     if (usuario) {
-        console.log('El correo electrónico ya está registrado:', usuario);
-        return { error: 'El correo electrónico ya está registrado' };
+        return { error: 'Ya existe una cuenta' };
     }
+
+    const usuarioDNI = await Usuario.findOne({ where: { DNI: DNI } });
+
+    if (usuarioDNI) {
+        return { error: 'Ya existe una cuenta' };
+    }
+
 
     const contraseñaEncriptada = await bcrypt.hash(contraseña, 10);
 

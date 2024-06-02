@@ -19,7 +19,7 @@ Usuario.init({
                 msg: "El campo DNI no puede ser nulo"
             },
             len: {
-                args: [8, 20],
+                args: [9, 20],
                 msg: "El campo DNI debe tener entre 8 y 20 caracteres"
             }
         }
