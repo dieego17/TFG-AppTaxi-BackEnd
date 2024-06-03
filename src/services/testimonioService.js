@@ -15,7 +15,7 @@ const getAllTestimonio = async () =>{
             }]
         }
         ],
-        attributes: ['mensaje_testimonio', "clasificacion_testimonio"],
+        attributes: ['mensaje_testimonio', "clasificacion_testimonio", "id_testimonio"],
         where:{
             clasificacion_testimonio: {
                 [Op.gte]: 4
