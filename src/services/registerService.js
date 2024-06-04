@@ -92,14 +92,12 @@ const createCliente = async (nombre, apellidos, telefono, correo_electronico, co
         DNI: DNI
     });
 
-    console.log('Usuario creado:', newUsuario);
 
     const newCliente = await Cliente.create({
         id_usuario: newUsuario.id_usuario,
         metodo_pago: metodo_pago // Utilizando directamente el ID del nuevo usuario
     });
 
-    console.log('Cliente creado:', newCliente);
 
     return newCliente;
 }
