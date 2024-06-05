@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 const bodyParse = require("body-parser")
 const cors = require("cors")
-const session = require('express-session')
 
 app.use(cors({
     origin: 'http://localhost:5173' 
@@ -11,15 +10,6 @@ app.use(cors({
 //configurar dotenv
 require('dotenv').config()
 
-//configurar session
-app.use(session
-    ({
-        secret: process.env.SESSION_SECRET,
-        resave: false,
-        saveUninitialized: true,
-        cookie: { secure: 'auto' }
-    })
-)
 
 //conexion a la base de datos
 const sequelize = require("./database/db");
