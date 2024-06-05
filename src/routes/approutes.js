@@ -8,11 +8,13 @@ const perdidaRouter = require("./v1/perdidaRouter")
 const reservaRouter = require('./v1/reservaRoutes')
 const viajeRouter = require('./v1/viajeRoutes')
 const taxistaRouter = require('./v1/taxistaRoutes')
+const statusRoutes = require('./v1/statusRoutes')
 
 const loginRoutes = require('./v1/loginRoutes')
 const registerRoutes = require('./v1/registerRoutes')
 
 // Routes
+router.use("/v1/status", statusRoutes)
 router.use("/v1/usuarios", usuarioRouter)
 router.use("/v1/testimonios", testimonioRouter)
 router.use("/v1/clientes", clienteRouter)
