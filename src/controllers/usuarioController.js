@@ -25,10 +25,12 @@ const getOneTaxista = async (req, res) => {
 }
 
 const cambiarContraseña = async (req, res) => {
-    const { correo_electronico, contraseñaOld, contraseñaNew } = req.body;
+    const { correo_electronico, contraseña } = req.body;
+
+    console.log(correo_electronico, contraseña);
 
     try {
-        const result = await usuarioService.cambiarContraseña(correo_electronico, contraseñaOld, contraseñaNew);
+        const result = await usuarioService.cambiarContraseña(correo_electronico, contraseña);
         res.json(result);
     } catch (error) {
         console.error("Error al cambiar la contraseña:", error);

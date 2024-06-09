@@ -3,7 +3,7 @@ const Cliente = require('../database/models/Cliente')
 const Taxista = require('../database/models/Taxista')
 const Reserva = require('../database/models/Reserva')
 const Viaje = require('../database/models/Viaje')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 
 const findClientes = async (idTaxista) =>{
   const clientes = await Cliente.findAll({
@@ -103,7 +103,7 @@ const cambiarContraseña = async (correo_electronico, contraseña) => {
   const usuario = await Usuario.findOne({ where: { correo_electronico: correo_electronico } });
   
   if (!usuario) {
-    return { error: 'Usuario no encontrado' };
+    return { error: 'Usuario o contraseña incorrecta' };
   }
   
   const contraseñaEncriptada = await bcrypt.hash(contraseña, 10);
