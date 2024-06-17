@@ -12,7 +12,6 @@ Usuario.init({
     DNI:{
         type: DataTypes.STRING(20),
         allowNull: false,
-        unique: true,
         validate: {
             notNull: {
                 msg: "El campo DNI no puede ser nulo"
