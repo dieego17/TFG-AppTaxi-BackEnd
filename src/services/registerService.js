@@ -33,12 +33,6 @@ const createTaxista = async (nombre, apellidos, telefono, correo_electronico, co
         return { error: 'Ya existe una cuenta' };
     }
 
-    const usuarioDNI = await Usuario.findOne({ where: { DNI: DNI } });
-
-    if (usuarioDNI) {
-        return { error: 'Ya existe una cuenta' };
-    }
-
     const num_licencia = generarLicencia();
     const contraseñaEncriptada = await bcrypt.hash(contraseña, 10);
 
@@ -69,12 +63,6 @@ const createCliente = async (nombre, apellidos, telefono, correo_electronico, co
     const usuario = await Usuario.findOne({ where: { correo_electronico: correo_electronico } });
 
     if (usuario) {
-        return { error: 'Ya existe una cuenta' };
-    }
-
-    const usuarioDNI = await Usuario.findOne({ where: { DNI: DNI } });
-
-    if (usuarioDNI) {
         return { error: 'Ya existe una cuenta' };
     }
 

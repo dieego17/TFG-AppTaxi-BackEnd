@@ -40,7 +40,6 @@ Taxista.init({
     numero_cuenta: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
         validate: {
             notNull: {
                 msg: "El campo numero_cuenta no puede ser nulo"
@@ -49,8 +48,8 @@ Taxista.init({
                 msg: "El campo numero_cuenta debe contener solo letras y números"
             },
             len: {
-                args: [10, 30],
-                msg: "El campo numero_cuenta debe tener entre 10 y 30 caracteres"
+                args: [15, 34],
+                msg: "El campo numero_cuenta debe tener entre 15 y 34 caracteres"
             }
         }
     },
