@@ -3,12 +3,22 @@ const app = express();
 const bodyParse = require("body-parser")
 const cors = require("cors")
 
+<<<<<<< HEAD
 //configurar cors
 app.use(cors())
+=======
+app.use(cors({
+    origin: 'http://localhost:5173' 
+  }));
+>>>>>>> baef6a1 (correcting errors)
 
 //configurar dotenv
 require('dotenv').config()
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> baef6a1 (correcting errors)
 //conexion a la base de datos
 const sequelize = require("./database/db");
 

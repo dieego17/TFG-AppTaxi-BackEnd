@@ -3,12 +3,18 @@ const Usuario = require('./models/Usuario');
 const Cliente = require('./models/Cliente');
 const Ganancia = require('./models/Ganancia');
 const Gasto = require('./models/Gasto');
+<<<<<<< HEAD
 const Factura = require('./models/Factura');
 const Viaje = require('./models/Viaje');
 const Notificacion = require('./models/Notificacion');
 const Testimonio = require('./models/Testimonio');
 const Reserva = require('./models/Reserva');
 const Token = require('./models/Token');
+=======
+const Viaje = require('./models/Viaje');
+const Testimonio = require('./models/Testimonio');
+const Reserva = require('./models/Reserva');
+>>>>>>> baef6a1 (correcting errors)
 
 
 // Asociación de Usuario con Taxista
@@ -31,11 +37,15 @@ Gasto.belongsTo(Taxista, { foreignKey: 'id_taxista' });
 Cliente.hasMany(Testimonio, { foreignKey: 'id_cliente' });
 Testimonio.belongsTo(Cliente, { foreignKey: 'id_cliente' });
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> baef6a1 (correcting errors)
 // Asociación de Cliente con Reserva
 Cliente.hasMany(Reserva, { foreignKey: 'id_cliente' });
 Reserva.belongsTo(Cliente, { foreignKey: 'id_cliente' });
 
+<<<<<<< HEAD
 // Asociación de Viaje con Reserva
 Viaje.hasMany(Reserva, { foreignKey: 'id_viaje' });
 Reserva.belongsTo(Viaje, { foreignKey: 'id_viaje' });
@@ -55,3 +65,12 @@ Viaje.belongsTo(Taxista, { foreignKey: 'id_taxista' });
 // Asociación de Viaje con Factura
 Viaje.hasOne(Factura, { foreignKey: 'id_viaje' });
 Factura.belongsTo(Viaje, { foreignKey: 'id_viaje' });
+=======
+// Asociación de Reserva con Viaje
+Reserva.belongsTo(Viaje, { foreignKey: 'id_viaje' });
+Viaje.hasOne(Reserva, { foreignKey: 'id_viaje' });
+
+// Asociación de Taxista con Viaje
+Taxista.hasMany(Viaje, { foreignKey: 'id_taxista' });
+Viaje.belongsTo(Taxista, { foreignKey: 'id_taxista' });
+>>>>>>> baef6a1 (correcting errors)

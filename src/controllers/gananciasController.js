@@ -11,7 +11,19 @@ const createGanancia = async (req, res) =>{
     res.json(createGanancia)
 }
 
+<<<<<<< HEAD
 module.exports = {
     getAllGanancias,
     createGanancia
+=======
+const deleteGanancia = async (req, res) =>{
+    const deleteGanancia = await gananciasController.deleteGanancia(req.params.id_ganancia)
+    res.json(deleteGanancia)
+}
+
+module.exports = {
+    getAllGanancias,
+    createGanancia,
+    deleteGanancia
+>>>>>>> baef6a1 (correcting errors)
 }

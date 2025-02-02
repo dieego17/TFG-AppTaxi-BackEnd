@@ -3,6 +3,7 @@ const Cliente = require('../database/models/Cliente')
 const Taxista = require('../database/models/Taxista')
 const Reserva = require('../database/models/Reserva')
 const Viaje = require('../database/models/Viaje')
+<<<<<<< HEAD
 
 const findClientes = async (idTaxista) =>{
   const clientes = await Cliente.findAll({
@@ -11,6 +12,17 @@ const findClientes = async (idTaxista) =>{
       {
         model: Usuario,
         attributes: ['nombre', 'apellidos', 'correo_electronico', 'telefono'],
+=======
+const bcrypt = require('bcryptjs')
+
+const findClientes = async (idTaxista) =>{
+  const clientes = await Cliente.findAll({
+    attributes: ['id_usuario', 'metodo_pago'],
+    include: [
+      {
+        model: Usuario,
+        attributes: ['nombre', 'apellidos', 'correo_electronico', 'telefono', 'direccion_usuario'],
+>>>>>>> baef6a1 (correcting errors)
         required: true, // INNER JOIN
       },
       {
@@ -23,6 +35,7 @@ const findClientes = async (idTaxista) =>{
             attributes: ['origen_viaje', 'destino_viaje', 'fecha_viaje', 'hora_viaje', 'precioTotal_viaje', 'estado_viaje'],
             where: { id_taxista: idTaxista },
             required: true, // INNER JOIN
+<<<<<<< HEAD
             include: [
               {
                 model: Taxista,
@@ -31,6 +44,8 @@ const findClientes = async (idTaxista) =>{
                 required: true, // INNER JOIN
               },
             ],
+=======
+>>>>>>> baef6a1 (correcting errors)
           },
         ],
       },
@@ -39,8 +54,104 @@ const findClientes = async (idTaxista) =>{
 
   return clientes
 }
+<<<<<<< HEAD
     
 
 module.exports = {
     findClientes
+=======
+
+//Funcion para obtener los datos del cliente para la factura
+const clienteFactura = async (idUsuario) => {
+  const ClienteFactura = await Usuario.findAll({
+    attributes:['nombre', 'apellidos', 'correo_electronico'],
+    include:[
+      {
+        model: Cliente,
+        atributtes:[],
+        include:[{
+          model: Reserva,
+          attributes:[],
+          include:[{
+            model: Viaje,
+            attributes:['origen_viaje', 'destino_viaje', 'fecha_viaje'],
+            include:[{
+              model: Taxista,
+              atributtes:[],
+              where:{
+                id_usuario: idUsuario
+              }
+            }]
+          }]
+        }]
+      },
+    ]
+  })
+
+  return ClienteFactura
+}
+
+//Funcion para obtener todos los taxistas
+const getAllTaxistas = async () => {
+  const AllTaxistas = await Usuario.findAll({
+    attributes: ['id_usuario', 'nombre', 'apellidos'],
+    include: [
+      {
+        model: Taxista,
+        attributes: ['num_licencia'],
+      },
+    ],
+    where: {
+      rol: 'admin'
+    }
+  });
+
+  return AllTaxistas;
+}
+
+
+const getOneTaxista = async (id) => {
+  const taxista = await Usuario.findOne({
+    attributes: ['id_usuario', 'nombre', 'apellidos', 'correo_electronico', 'telefono', 'direccion_usuario', 'DNI'],
+    include: [
+      {
+        model: Taxista,
+        attributes: ['num_licencia', 'numero_cuenta'],
+      },
+    ],
+    where: {
+      id_usuario: id
+    }
+  });
+
+  return taxista;
+}
+
+const cambiarContraseña = async (correo_electronico, contraseña) => {
+  const usuario = await Usuario.findOne({ where: { correo_electronico: correo_electronico } });
+  
+  if (!usuario) {
+    return { error: 'Usuario o contraseña incorrecta' };
+  }
+  
+  const contraseñaEncriptada = await bcrypt.hash(contraseña, 10);
+
+  await Usuario.update({ contraseña: contraseñaEncriptada }, {
+    where: {
+      correo_electronico: correo_electronico
+    }
+  });
+
+  return { success: true, message: 'Contraseña cambiada correctamente' };
+}
+
+    
+
+module.exports = {
+    findClientes,
+    clienteFactura,
+    getAllTaxistas,
+    getOneTaxista,
+    cambiarContraseña
+>>>>>>> baef6a1 (correcting errors)
 }
